@@ -1,0 +1,32 @@
+$padding-extra-sm: 0.45rem;
+$padding-sm: 0.8rem;
+$padding-md: 1.34rem;
+$padding-lg: 2rem;
+$padding-extra-lg: 5rem;
+
+$clr-primary: white;
+$clr-primary-faded: rgb(206, 206, 206);
+$clr-neutral: rgb(15, 15, 15);
+$clr-neutral-faded: rgb(36, 36, 36);
+$clr-accent: rgb(228, 20, 20);
+$clr-accent-faded: rgb(141, 19, 19);
+
+$fs-extra-sm: 0.56rem;
+$fs-sm: 0.8rem;
+$fs-md: 0.87rem;
+$fs-lg: 1.6rem;
+$fs-extra-lg: 2.9rem;
+
+$fs-heading: clamp($fs-lg, 2vw + 1rem, $fs-extra-lg);
+$fs-paragraph: clamp($fs-extra-sm, 1vw, $fs-sm);
+
+$fw-normal: 500;
+$fw-bold: 600;
+$fw-extra-bold: 700;
+
+$gap-extra-sm: 0.2rem;
+$gap-sm: 0.86rem;
+$gap-md: 1.1rem;
+$gap-lg: 2rem;
+
+$max-width: 80rem;

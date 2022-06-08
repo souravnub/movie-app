@@ -1,0 +1,132 @@
+@use "../../scss/base" as *;
+
+.single-movie-info-container {
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    background-blend-mode: multiply;
+
+    &__main-info {
+        display: grid;
+        grid-template-columns: 4fr 6fr;
+        gap: $gap-lg;
+
+        padding-block: calc($padding-extra-lg + 2rem);
+        & > img {
+            max-width: 15rem;
+            border-radius: 1em;
+            justify-self: right;
+        }
+
+        &__head {
+            padding-right: $padding-extra-lg;
+            @include flex($gap: $gap-sm, $direction: column);
+            & > span {
+                font-size: calc($fs-heading - 0.67rem);
+                font-weight: $fw-bold;
+            }
+            .genres-container {
+                @include flex();
+                .btn-primary {
+                    padding: $padding-extra-sm $padding-sm;
+                    font-size: $fs-paragraph;
+                    font-weight: $fw-normal;
+                }
+            }
+            .casts-container {
+                & > span {
+                    font-size: calc($fs-heading - 1.4rem);
+                    text-transform: capitalize;
+                    font-weight: $fw-normal;
+                    margin-block: $gap-sm;
+                    margin-bottom: $gap-extra-sm;
+                }
+                &__casts-cards-container {
+                    @include flex();
+                    width: min-content;
+                    flex-wrap: wrap;
+
+                    width: 100%;
+
+                    img {
+                        max-width: 5rem;
+                    }
+                    span {
+                        max-width: 5rem;
+                        font-size: calc($fs-paragraph - 0.05rem);
+                    }
+
+                    .cast-card {
+                        @include flex($direction: column, $gap: $gap-extra-sm);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.related-videos-container {
+    margin-block: $padding-lg;
+    @include flex($direction: column, $gap: $gap-lg);
+    .video-card {
+        width: 100%;
+        @include flex($direction: column, $align-items: center);
+        span {
+            font-weight: $fw-bold;
+            font-size: calc($fs-heading - 1.5rem);
+        }
+        iframe {
+            background-color: $clr-neutral-faded;
+            width: 50%;
+            aspect-ratio: 16 / 10;
+        }
+    }
+}
+
+.similar-movies-container {
+    padding-inline: $padding-lg;
+    & > span {
+        font-size: $fs-heading;
+        text-transform: capitalize;
+        font-weight: $fw-bold;
+        margin-bottom: $gap-md;
+    }
+    .similar-movie-card {
+        .img-container {
+            position: relative;
+            &:hover {
+                & > span {
+                    color: $clr-accent;
+                }
+                a {
+                    opacity: 1;
+                }
+            }
+            a {
+                position: absolute;
+                inset: 0;
+                background-color: rgba(#000000, 0.8);
+                font-size: $fs-lg;
+                opacity: 0;
+                @include flex($align-items: center, $justify-content: center);
+                transition: opacity 200ms ease-in-out;
+                &:focus {
+                    opacity: 1;
+                    border: none;
+                    outline: none;
+                }
+            }
+
+            @include flex($direction: column);
+            img {
+                border-radius: 1em;
+            }
+        }
+        span {
+            font-size: $fs-paragraph;
+            font-weight: $fw-bold;
+            transition: color 250ms ease-in-out;
+        }
+    }
+}

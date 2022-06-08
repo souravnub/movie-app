@@ -1,0 +1,41 @@
+@use "variables" as *;
+
+*,
+*::before,
+*::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+span,
+p,
+a,
+li {
+    display: inline-block;
+}
+
+p {
+    line-height: 1.5;
+    font-size: $fs-paragraph;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+img {
+    max-width: 100%;
+}

@@ -1,0 +1,35 @@
+@use "../../scss/base" as *;
+
+.spinner {
+    z-index: 9999999999;
+    margin-inline: auto;
+    position: fixed;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+
+    border: 0.5em solid $clr-primary-faded;
+    border-top: 0.5em solid $clr-accent;
+    border-bottom: 0.5em solid $clr-accent;
+
+    border-radius: 50%;
+
+    width: $fs-extra-lg;
+    aspect-ratio: 1;
+
+    animation: spinner-spin 5s ease-in-out infinite;
+}
+
+.spinner-normal {
+    $border-width: 0.3em;
+    border: $border-width solid $clr-primary-faded;
+    border-top: $border-width solid $clr-accent;
+    border-bottom: $border-width solid $clr-accent;
+
+    border-radius: 50%;
+
+    width: $fs-lg;
+    aspect-ratio: 1;
+
+    animation: spinner-spin 5s ease-in-out infinite;
+}

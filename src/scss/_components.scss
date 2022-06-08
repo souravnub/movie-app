@@ -1,0 +1,46 @@
+@use "variables" as *;
+
+.btn-primary {
+    padding: calc($padding-sm - 0.2rem) $padding-md;
+    font-weight: $fw-bold;
+    border-radius: 100vh;
+    border: 0.14em solid $clr-primary-faded;
+    color: $clr-primary;
+    text-transform: capitalize;
+
+    font-family: "Roboto", sans-serif;
+
+    transition: color 250ms ease, background-color 250ms ease;
+
+    &:hover {
+        color: $clr-accent;
+        background-color: $clr-primary;
+    }
+    &:focus {
+        color: $clr-accent;
+        background-color: $clr-primary;
+    }
+}
+
+.btn-neutral {
+    padding: $padding-extra-sm $padding-md;
+    font-weight: $fw-bold;
+    border-radius: 100vh;
+    border: 0.14em solid $clr-accent;
+    color: $clr-primary;
+    text-transform: capitalize;
+
+    font-family: "Roboto", sans-serif;
+    box-shadow: 0 0 0.5em 0.05em $clr-accent;
+
+    background-color: $clr-accent;
+
+    transition: box-shadow 250ms ease;
+
+    &:hover {
+        box-shadow: 0 0 0.4em 0.2em $clr-accent;
+    }
+    &:focus {
+        box-shadow: 0 0 0.4em 0.2em $clr-accent;
+    }
+}

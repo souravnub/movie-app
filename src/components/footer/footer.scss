@@ -1,0 +1,64 @@
+@use "../../scss/base" as *;
+
+footer {
+    position: absolute;
+    margin-top: $padding-extra-lg;
+    padding-block: calc($padding-extra-lg + 2rem);
+    width: 100%;
+    max-width: $max-width;
+    background-image: url("../../assets/footer-bg.jpg");
+    background-color: $clr-neutral-faded;
+
+    @include flex($direction: column, $align-items: center);
+
+    .logo {
+        & > span:nth-child(1) {
+            font-size: calc($fs-heading + 1rem);
+            font-weight: $fw-bold;
+            text-transform: capitalize;
+            color: $clr-accent;
+        }
+        & > span:nth-child(2) {
+            font-size: $fs-lg;
+            text-transform: capitalize;
+        }
+    }
+
+    .links-container {
+        @include flex($gap: $gap-lg);
+        flex-wrap: wrap;
+        padding-inline: $padding-lg;
+
+        ul {
+            @include flex($direction: column);
+            font-size: calc($fs-md + 0.2rem);
+            font-weight: $fw-bold;
+            text-transform: capitalize;
+
+            li {
+                position: relative;
+                padding-bottom: $padding-extra-sm;
+
+                &::after {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    content: "";
+                    width: 100%;
+                    height: 2px;
+                    border-radius: 100vh;
+                    background-color: $clr-accent-faded;
+                    transform: scaleX(0);
+                    transform-origin: left;
+                    transition: transform 200ms ease;
+                }
+
+                &:hover {
+                    &::after {
+                        transform: scaleX(1);
+                    }
+                }
+            }
+        }
+    }
+}

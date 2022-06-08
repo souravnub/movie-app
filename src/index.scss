@@ -1,0 +1,13 @@
+@use "./scss/base" as *;
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: $clr-neutral;
+    max-width: $max-width;
+    margin-inline: auto;
+    font-family: "Montserrat", sans-serif;
+    color: white;
+}

@@ -1,0 +1,86 @@
+@use "../../scss/base" as *;
+
+.hero-movie-card {
+    padding-block: $padding-extra-lg;
+    padding-inline: $padding-extra-lg;
+
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    background-blend-mode: darken;
+
+    display: grid;
+    grid-template-columns: 6fr 4fr;
+    gap: $gap-md;
+
+    @media screen and (max-width: 50rem) {
+        align-items: center;
+        flex-direction: column-reverse;
+        justify-content: center;
+        display: flex;
+    }
+    @media screen and (max-width: 31rem) {
+        padding-inline: $padding-lg;
+        &__info {
+            &__btn-container {
+                justify-content: center !important;
+            }
+        }
+    }
+
+    color: $clr-primary;
+
+    position: relative;
+
+    &::after {
+        content: "";
+        background-color: rgba(black, 0.75);
+        position: absolute;
+        inset: 0;
+    }
+
+    &__info {
+        z-index: 9;
+        @include flex(
+            $direction: column,
+            $gap: $gap-lg,
+            $justify-content: center
+        );
+        & > span {
+            font-weight: $fw-extra-bold;
+            font-size: $fs-heading;
+        }
+
+        p {
+            font-weight: $fw-normal;
+        }
+
+        &__btn-container {
+            @include flex();
+            flex-wrap: wrap;
+        }
+    }
+
+    &__poster-container {
+        z-index: 9;
+        img {
+            border-radius: 1em;
+            width: 100%;
+            max-width: 15.6rem;
+        }
+    }
+}
+
+.swiper-pagination-bullet {
+    display: inline-block;
+    width: 0.8rem;
+    height: 0.6rem;
+    background-color: $clr-primary;
+
+    border-radius: 0.1em;
+}
+.swiper-pagination-bullet-active {
+    color: #fff;
+    background: $clr-accent;
+}

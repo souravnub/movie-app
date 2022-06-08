@@ -1,0 +1,49 @@
+@use "../../scss/base" as *;
+
+.main-media-container {
+    padding-top: $padding-extra-lg;
+    padding-inline: $padding-lg;
+}
+.main-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    row-gap: $gap-md;
+    column-gap: $gap-lg;
+}
+.similar-movie-card {
+    .img-container {
+        position: relative;
+        &:hover {
+            & > span {
+                color: $clr-accent;
+            }
+            a {
+                opacity: 1;
+            }
+        }
+        a {
+            position: absolute;
+            inset: 0;
+            background-color: rgba(#000000, 0.8);
+            font-size: $fs-lg;
+            opacity: 0;
+            @include flex($align-items: center, $justify-content: center);
+            transition: opacity 200ms ease-in-out;
+            &:focus {
+                opacity: 1;
+                border: none;
+                outline: none;
+            }
+        }
+
+        @include flex($direction: column);
+        img {
+            border-radius: 1em;
+        }
+    }
+    span {
+        font-size: calc($fs-paragraph - 0.1rem);
+        font-weight: $fw-normal;
+        transition: color 250ms ease-in-out;
+    }
+}

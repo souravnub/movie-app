@@ -1,0 +1,18 @@
+@use "../../scss/base" as *;
+
+.main-swiper-container {
+    margin-top: $padding-lg;
+    .head-container {
+        padding-inline: $padding-md;
+        margin-bottom: $gap-sm;
+        @include flex($align-items: center, $justify-content: space-between);
+
+        font-weight: $fw-bold;
+        text-transform: capitalize;
+
+        a {
+            font-size: $fs-sm;
+            padding-block: $padding-extra-sm;
+        }
+    }
+}
