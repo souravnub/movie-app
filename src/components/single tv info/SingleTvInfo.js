@@ -6,15 +6,22 @@ import axiosClient from "../../features/api/axiosClient";
 import Spinner from "../spinner/Spinner";
 import { FaInfoCircle } from "react-icons/fa";
 import SwiperComponent from "../swiper/SwiperComponent";
+import { MdBookmarkAdd, MdBookmarkRemove } from "react-icons/md";
 import "../single movie info/singlemovie.scss";
 import {
     fetchSingleTvData,
     getSingleTvData,
 } from "../../features/tv/singleTvSlice";
+import {
+    addToBookMarks,
+    getBookMarked,
+    removeFromBookMarks,
+} from "../../features/bookmarked/bookMarkedSlice";
 
 const SingleTvInfo = () => {
     const { tvId } = useParams();
 
+    const bookmarked = useSelector(getBookMarked());
     const { isLoading, isError, error, singleTvDetails } = useSelector(
         getSingleTvData()
     );
@@ -23,6 +30,18 @@ const SingleTvInfo = () => {
     const [casts, setCasts] = useState([]);
     const [relatedVedios, setRelatedVideos] = useState([]);
     const [similarTv, setSimilarTv] = useState([]);
+
+    const [isBookMarked, setIsBookMarked] = useState(false);
+
+    useEffect(() => {
+        if (!isLoading) {
+            const e = bookmarked.find((ele) => ele.id === singleTvDetails.id);
+            if (e) {
+                return setIsBookMarked(true);
+            }
+            return setIsBookMarked(false);
+        }
+    }, [bookmarked, isLoading]);
 
     const similarTvData = similarTv.map((movie) => {
         const { id, original_title, original_name, poster_path } = movie;
@@ -74,6 +93,27 @@ const SingleTvInfo = () => {
         }
     }, [tvId]);
 
+    const handleAddToBookmarks = () => {
+        const { id, original_title, original_name, poster_path, mediaType } =
+            singleTvDetails;
+        const info = {
+            id,
+            original_title,
+            original_name,
+            poster_path,
+            mediaType,
+        };
+        dispatch(addToBookMarks(info));
+    };
+    const removeFromBookmark = () => {
+        dispatch(
+            removeFromBookMarks({
+                id: singleTvDetails.id,
+                mediaType: singleTvDetails.mediaType,
+            })
+        );
+    };
+
     if (isLoading) {
         return <Spinner />;
     }
@@ -106,7 +146,18 @@ const SingleTvInfo = () => {
                     />
 
                     <div className="single-movie-info-container__main-info__head">
-                        <span>{original_title || original_name}</span>
+                        <div className="head-info">
+                            <span>{original_title || original_name}</span>
+                            {!isBookMarked ? (
+                                <button onClick={handleAddToBookmarks}>
+                                    <MdBookmarkAdd className="icon" />
+                                </button>
+                            ) : (
+                                <button onClick={removeFromBookmark}>
+                                    <MdBookmarkRemove className="icon icon-red" />
+                                </button>
+                            )}
+                        </div>
                         <div className="genres-container">
                             {genres &&
                                 genres.map((genre) => {

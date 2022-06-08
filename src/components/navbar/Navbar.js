@@ -1,6 +1,7 @@
-import React, { useRef, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./navbar.scss";
+import { MdBookmarkAdded } from "react-icons/md";
 
 const Navbar = () => {
     const location = useLocation();
@@ -31,6 +32,12 @@ const Navbar = () => {
         });
     }, [window.scrollY]);
 
+    let links = [
+        { text: "home", path: "/" },
+        { text: "movies", path: "/movies" },
+        { text: "TV series", path: "/tv" },
+    ];
+
     return (
         <nav>
             <Link className="logo" to="/">
@@ -39,18 +46,18 @@ const Navbar = () => {
             </Link>
 
             <ul className="nav-links-container">
-                <li>
-                    <Link to="/" className="active">
-                        home
-                    </Link>
-                </li>
-                <li>
-                    <Link to="/movies">movies</Link>
-                </li>
-                <li>
-                    <Link to="/tv">TV series</Link>
-                </li>
+                {links.map((link, idx) => {
+                    return (
+                        <li key={idx}>
+                            <Link to={link.path}>{link.text}</Link>
+                        </li>
+                    );
+                })}
             </ul>
+
+            <Link to="/bookmarked" className="bookmark-link">
+                <MdBookmarkAdded />
+            </Link>
         </nav>
     );
 };

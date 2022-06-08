@@ -26,7 +26,7 @@ const singleTvSlice = createSlice({
         [fetchSingleTvData.fulfilled]: (state, { payload }) => {
             state.isLoading = false;
             state.isError = false;
-            state.singleTvDetails = payload;
+            state.singleTvDetails = { ...payload, mediaType: "tv" };
         },
         [fetchSingleTvData.rejected]: (state, { payload }) => {
             state.isLoading = false;

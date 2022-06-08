@@ -7,10 +7,12 @@ import topRatedTvSlice from "./features/tv/topRatedTvSlice";
 import trendingMoviesSlice from "./features/movies/trendingMoviesSlice";
 import singleTvSlice from "./features/tv/singleTvSlice";
 import trendingTvSlice from "./features/tv/trendingTvSlice";
+import bookMarkedSlice from "./features/bookmarked/bookMarkedSlice";
 
 const store = configureStore({
     reducer: {
         modal: modalSlice,
+        bookmarked: bookMarkedSlice,
         popularMovies: popularMoviesSlice,
         singleMovieDetails: singleMovieSlice,
         trendingMovies: trendingMoviesSlice,

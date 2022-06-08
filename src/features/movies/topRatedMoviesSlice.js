@@ -27,6 +27,7 @@ const topRatedMoviesSlice = createSlice({
         [fetchTopRatedMovies.fulfilled]: (state, { payload }) => {
             state.isLoading = false;
             state.isError = false;
+
             state.topRatedMovies = payload.results;
             state.totalPages = payload.total_pages;
         },

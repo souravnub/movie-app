@@ -5,12 +5,29 @@
     background-repeat: no-repeat;
     background-size: cover;
 
+    min-height: 100vh;
+
     background-blend-mode: multiply;
 
     &__main-info {
         display: grid;
         grid-template-columns: 4fr 6fr;
         gap: $gap-lg;
+        padding-inline: $padding-lg;
+
+        @media screen and (max-width: 40.6rem) {
+            grid-template-columns: 1fr;
+            grid-template-rows: auto 4fr;
+            align-items: center;
+
+            gap: $gap-sm;
+            & > img {
+                justify-self: center !important;
+            }
+            &__head {
+                align-items: center !important;
+            }
+        }
 
         padding-block: calc($padding-extra-lg + 2rem);
         & > img {
@@ -20,11 +37,27 @@
         }
 
         &__head {
-            padding-right: $padding-extra-lg;
             @include flex($gap: $gap-sm, $direction: column);
-            & > span {
-                font-size: calc($fs-heading - 0.67rem);
-                font-weight: $fw-bold;
+            .head-info {
+                width: 100%;
+                @include flex(
+                    $justify-content: space-between,
+                    $align-items: center
+                );
+                & > span {
+                    font-size: calc($fs-heading - 0.67rem);
+                    font-weight: $fw-bold;
+                }
+                .icon {
+                    padding: 0.08em;
+                    font-size: $fs-lg;
+                    background-color: $clr-primary;
+                    color: rgb(29, 120, 29);
+                    border-radius: 50%;
+                }
+                .icon-red {
+                    color: $clr-accent;
+                }
             }
             .genres-container {
                 @include flex();
@@ -32,6 +65,7 @@
                     padding: $padding-extra-sm $padding-sm;
                     font-size: $fs-paragraph;
                     font-weight: $fw-normal;
+                    cursor: default;
                 }
             }
             .casts-container {
@@ -80,6 +114,11 @@
             background-color: $clr-neutral-faded;
             width: 50%;
             aspect-ratio: 16 / 10;
+        }
+        @media screen and (max-width: 56.5rem) {
+            iframe {
+                width: 80%;
+            }
         }
     }
 }

@@ -1,0 +1,116 @@
+@use "../../scss/base" as *;
+
+.bar-bottom {
+    position: relative;
+    &::after {
+        content: "";
+        height: 0.08em;
+        border-radius: 100vh;
+        width: 1em;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background-color: $clr-accent;
+    }
+}
+
+.main-parent-bookmark-container {
+    padding-top: $padding-extra-lg;
+
+    .heading {
+        font-size: calc($fs-heading - 0.3rem);
+        font-weight: $fw-normal;
+        text-transform: capitalize;
+        margin-bottom: $padding-lg;
+
+        @include flex($align-items: center, $justify-content: center);
+
+        & > span:nth-child(1) {
+            padding-bottom: 0.1em;
+        }
+    }
+
+    .main-bookmark-container {
+        @include flex($direction: column, $gap: $gap-lg);
+
+        &__sub-container {
+            padding: $padding-sm $padding-lg;
+            width: 100%;
+
+            .empty-heading {
+                font-weight: $fw-bold;
+                font-size: $fs-lg;
+                opacity: 0.3;
+                text-transform: capitalize;
+            }
+
+            .sub-heading {
+                font-weight: $fw-normal;
+                font-size: $fs-lg;
+                text-transform: capitalize;
+
+                margin-bottom: $gap-lg;
+            }
+
+            .bookmarked-elements-container {
+                @include flex();
+                flex-wrap: wrap;
+                gap: $gap-lg;
+
+                .element-card {
+                    width: 12rem;
+                    position: relative;
+
+                    & > button {
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        z-index: 99;
+                        transform: translate(50%, -50%);
+
+                        &:hover,
+                        &:focus-visible {
+                            .icon {
+                                color: $clr-accent;
+                            }
+                        }
+                    }
+
+                    .icon {
+                        font-size: $fs-lg;
+                        color: $clr-primary;
+                        padding: 0.1em;
+
+                        transition: color 250ms ease;
+                    }
+
+                    .img-container {
+                        position: relative;
+
+                        a {
+                            position: absolute;
+                            inset: 0;
+                            background-color: rgba(black, 0.7);
+                            display: grid;
+                            place-items: center;
+                            font-size: $fs-lg;
+
+                            opacity: 0;
+                            transition: opacity 250ms ease;
+                        }
+
+                        &:hover {
+                            a {
+                                opacity: 1;
+                            }
+                        }
+                    }
+
+                    & > span {
+                        font-size: $fs-paragraph;
+                    }
+                }
+            }
+        }
+    }
+}

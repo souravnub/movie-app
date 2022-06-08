@@ -27,6 +27,7 @@ const popularMoviesSlice = createSlice({
     extraReducers: {
         [getPopularMovies.fulfilled]: (state, { payload }) => {
             state.isLoading = false;
+
             state.popularMovies = payload.results;
         },
         [getPopularMovies.rejected]: (state, { payload }) => {

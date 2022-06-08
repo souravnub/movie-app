@@ -33,6 +33,19 @@ nav {
             text-transform: capitalize;
         }
     }
+    .bookmark-link {
+        font-size: calc($fs-lg - 0.3rem);
+        border-radius: 50%;
+        padding: calc($padding-extra-sm - 0.2rem);
+
+        @include flex($justify-content: center, $align-items: center);
+
+        transition: background-color 200ms ease, color 200ms ease;
+        &:hover {
+            background-color: $clr-primary;
+            color: $clr-accent;
+        }
+    }
 
     .nav-links-container {
         @include flex($align-items: center, $gap: $gap-lg);
@@ -45,6 +58,11 @@ nav {
                 padding-bottom: 0.3rem;
 
                 position: relative;
+
+                transition: color 250ms ease;
+                &:hover {
+                    color: $clr-accent;
+                }
                 &::after {
                     content: "";
                     width: 100%;

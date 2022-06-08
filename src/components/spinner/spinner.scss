@@ -21,14 +21,14 @@
 }
 
 .spinner-normal {
-    $border-width: 0.3em;
+    $border-width: 0.25em;
     border: $border-width solid $clr-primary-faded;
     border-top: $border-width solid $clr-accent;
     border-bottom: $border-width solid $clr-accent;
 
     border-radius: 50%;
 
-    width: $fs-lg;
+    width: 2.3rem;
     aspect-ratio: 1;
 
     animation: spinner-spin 5s ease-in-out infinite;

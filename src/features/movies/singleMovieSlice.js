@@ -28,7 +28,7 @@ const popularMoviesSlice = createSlice({
             state.isLoading = true;
         },
         [getMovieDetails.fulfilled]: (state, { payload }) => {
-            state.movieDetails = payload;
+            state.movieDetails = { ...payload, mediaType: "movie" };
             state.isLoading = false;
         },
         [getMovieDetails.rejected]: (state, { payload }) => {

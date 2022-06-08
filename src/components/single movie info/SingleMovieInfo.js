@@ -9,8 +9,14 @@ import {
 } from "../../features/movies/singleMovieSlice";
 import Spinner from "../spinner/Spinner";
 import { FaInfoCircle } from "react-icons/fa";
+import { MdBookmarkAdd, MdBookmarkRemove } from "react-icons/md";
 import SwiperComponent from "../swiper/SwiperComponent";
 import "./singlemovie.scss";
+import {
+    addToBookMarks,
+    getBookMarked,
+    removeFromBookMarks,
+} from "../../features/bookmarked/bookMarkedSlice";
 
 const SingleMovieInfo = () => {
     const { movieId } = useParams();
@@ -18,6 +24,21 @@ const SingleMovieInfo = () => {
     const { isLoading, isError, error, movieDetails } = useSelector(
         getSingleMovieDetails()
     );
+
+    const bookmarked = useSelector(getBookMarked());
+
+    const [isBookMarked, setIsBookMarked] = useState(false);
+
+    useEffect(() => {
+        if (!isLoading) {
+            const e = bookmarked.find((ele) => ele.id === movieDetails.id);
+            if (e) {
+                return setIsBookMarked(true);
+            }
+            return setIsBookMarked(false);
+        }
+    }, [bookmarked, isLoading]);
+
     let [slidesPerView, setSlidesPerView] = useState(6);
 
     const [casts, setCasts] = useState([]);
@@ -43,6 +64,7 @@ const SingleMovieInfo = () => {
     });
 
     const breakpoints = {
+        extraSm: 400,
         small: 500,
         medium: 800,
         large: 1200,
@@ -62,8 +84,10 @@ const SingleMovieInfo = () => {
         });
 
         let windowWidth = window.innerWidth;
-        let { small, medium, large } = breakpoints;
-        if (windowWidth <= small) {
+        let { small, medium, large, extraSm } = breakpoints;
+        if (windowWidth <= extraSm) {
+            setSlidesPerView(3);
+        } else if (windowWidth >= extraSm && windowWidth <= small) {
             setSlidesPerView(4);
         } else if (windowWidth <= medium && windowWidth >= small) {
             setSlidesPerView(5);
@@ -74,6 +98,27 @@ const SingleMovieInfo = () => {
         }
     }, [movieId]);
 
+    const handleAddToBookmarks = () => {
+        const { id, original_title, original_name, poster_path, mediaType } =
+            movieDetails;
+        const info = {
+            id,
+            original_title,
+            original_name,
+            poster_path,
+            mediaType,
+        };
+        dispatch(addToBookMarks(info));
+    };
+    const removeFromBookmark = () => {
+        dispatch(
+            removeFromBookMarks({
+                id: movieDetails.id,
+                mediaType: movieDetails.mediaType,
+            })
+        );
+    };
+
     if (isLoading) {
         return <Spinner />;
     }
@@ -81,7 +126,7 @@ const SingleMovieInfo = () => {
         return <h1>error : {error}</h1>;
     }
 
-    const { backdrop_path, original_title, overview, poster_path, genres } =
+    const { id, backdrop_path, original_title, overview, poster_path, genres } =
         movieDetails;
 
     return (
@@ -100,7 +145,19 @@ const SingleMovieInfo = () => {
                     />
 
                     <div className="single-movie-info-container__main-info__head">
-                        <span>{original_title}</span>
+                        <div className="head-info">
+                            <span>{original_title}</span>
+
+                            {!isBookMarked ? (
+                                <button onClick={handleAddToBookmarks}>
+                                    <MdBookmarkAdd className="icon" />
+                                </button>
+                            ) : (
+                                <button onClick={removeFromBookmark}>
+                                    <MdBookmarkRemove className="icon icon-red" />
+                                </button>
+                            )}
+                        </div>
                         <div className="genres-container">
                             {genres &&
                                 genres.map((genre) => {
