@@ -19,18 +19,12 @@ import { fetchSearchResults } from "../../features/search/searchSlice";
 
 const MoviesPage = () => {
     const dispatch = useDispatch();
-    const {
-        isLoading: isTrendingLoading,
-        trendingMovies,
-        isError: isTrendingError,
-        error: trendingError,
-    } = useSelector(getTrendingMovies());
-    const {
-        isLoading: isTopRatedLoading,
-        topRatedMovies,
-        isError: isTopRatedError,
-        error: topRatedError,
-    } = useSelector(getTopRatedMovies());
+    const { isLoading: isTrendingLoading, trendingMovies } = useSelector(
+        getTrendingMovies()
+    );
+    const { isLoading: isTopRatedLoading, topRatedMovies } = useSelector(
+        getTopRatedMovies()
+    );
 
     const [currentContentType, setCurrentContentType] = useState(
         localStorage.getItem("currentMoviesContentType" || "trending")

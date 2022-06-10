@@ -17,39 +17,39 @@ const Footer = () => {
                         <Link to="/">home</Link>
                     </li>
                     <li>
-                        <a href="#">contact us</a>
+                        <a href="/">contact us</a>
                     </li>
                     <li>
-                        <a href="#">terms of services</a>
+                        <a href="/">terms of services</a>
                     </li>
                     <li>
-                        <a href="#">about us</a>
+                        <a href="/">about us</a>
                     </li>
                 </ul>
                 <ul>
                     <li>
-                        <a href="#">live</a>
+                        <a href="/">live</a>
                     </li>
                     <li>
-                        <a href="#">f a q</a>
+                        <a href="/">f a q</a>
                     </li>
                     <li>
-                        <a href="#">premium</a>
+                        <a href="/">premium</a>
                     </li>
                     <li>
-                        <a href="#">privacy policy</a>
+                        <a href="/">privacy policy</a>
                     </li>
                 </ul>
 
                 <ul>
                     <li>
-                        <a href="#">you must watch</a>
+                        <a href="/">you must watch</a>
                     </li>
                     <li>
-                        <a href="#">recently released</a>
+                        <a href="/">recently released</a>
                     </li>
                     <li>
-                        <a href="#">top IMDB</a>
+                        <a href="/">top IMDB</a>
                     </li>
                 </ul>
             </div>

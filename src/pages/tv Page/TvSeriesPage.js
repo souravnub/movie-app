@@ -19,18 +19,12 @@ import SearchComponent from "../../components/search/SearchComponent";
 
 const TvSeriesPage = () => {
     const dispatch = useDispatch();
-    const {
-        isLoading: isTrendingLoading,
-        trendingTv,
-        isError: isTrendingError,
-        error: trendingError,
-    } = useSelector(getTrendingTv());
-    const {
-        isLoading: isTopRatedLoading,
-        topRatedTv,
-        isError: isTopRatedError,
-        error: topRatedError,
-    } = useSelector(getTopRatedTv());
+    const { isLoading: isTrendingLoading, trendingTv } = useSelector(
+        getTrendingTv()
+    );
+    const { isLoading: isTopRatedLoading, topRatedTv } = useSelector(
+        getTopRatedTv()
+    );
 
     const [currentContentType, setCurrentContentType] = useState(
         localStorage.getItem("currentTvContentType" || "trending")

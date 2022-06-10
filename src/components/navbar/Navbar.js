@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./navbar.scss";
 import { MdBookmarkAdded } from "react-icons/md";
@@ -10,6 +10,8 @@ import { closeMenu, openMenu } from "../../features/navbar/navSlice";
 const Navbar = () => {
     const location = useLocation();
     let currentLoaction = location.pathname;
+
+    const [scrollY, setScrollY] = useState(window.scrollY);
 
     const { isMenuOpen } = useSelector((store) => store.navbar);
     const dispatch = useDispatch();
@@ -31,16 +33,17 @@ const Navbar = () => {
         window.scrollTo(0, 0);
     }, [location]);
 
+    window.addEventListener("scroll", () => {
+        setScrollY(window.scrollY);
+    });
     useEffect(() => {
         const navigation = document.querySelector("nav");
-        window.addEventListener("scroll", (e) => {
-            if (window.scrollY >= 30) {
-                navigation.classList.add("background-appear");
-            } else {
-                navigation.classList.remove("background-appear");
-            }
-        });
-    }, [window.scrollY]);
+        if (scrollY >= 30) {
+            navigation.classList.add("background-appear");
+        } else {
+            navigation.classList.remove("background-appear");
+        }
+    }, [scrollY]);
 
     let links = [
         { text: "home", path: "/" },

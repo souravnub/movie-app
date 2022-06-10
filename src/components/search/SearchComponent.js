@@ -1,7 +1,6 @@
 import React from "react";
 import "./searchComponent.scss";
 import { BiSearch } from "react-icons/bi";
-import { useDispatch } from "react-redux";
 import SpinnerNormal from "../spinner/SpinnerNormal";
 
 const SearchComponent = ({
@@ -10,8 +9,6 @@ const SearchComponent = ({
     handleInputChange,
     handleFormSubmit,
 }) => {
-    const dispatch = useDispatch();
-
     return (
         <form onSubmit={handleFormSubmit}>
             <div className="input-field-container">

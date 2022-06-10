@@ -80,7 +80,10 @@ const SingleMovieInfo = () => {
             let mainRes =
                 res.data.cast &&
                 res.data.cast.filter((cast) => {
-                    if (cast.profile_path) return cast;
+                    if (cast.profile_path) {
+                        return cast;
+                    }
+                    return;
                 });
             setCasts(mainRes && mainRes.slice(0, 5));
         });

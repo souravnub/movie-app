@@ -2,13 +2,11 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setModalState } from "../../features/modal/modalSlice";
 import SwiperComponent from "../swiper/SwiperComponent";
-import axiosClient from "../../features/api/axiosClient";
 import "./heroSlide.scss";
 import { Link } from "react-router-dom";
 import { originalImgUrl } from "../../features/api/apiRoutesData";
 import { getPopularMovies } from "../../features/movies/popularMoviesSlice";
 import { getPopularMovieData } from "../../features/movies/popularMoviesSlice";
-import Spinner from "../spinner/Spinner";
 
 const HeroSlider = () => {
     const dispatch = useDispatch();
