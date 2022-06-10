@@ -1,7 +1,7 @@
 @use "../../scss/base" as *;
 
 .spinner {
-    z-index: 9999999999;
+    z-index: 9999;
     margin-inline: auto;
     position: fixed;
     top: 50%;
