@@ -40,20 +40,21 @@ const MainSwiper = ({ mediaType, type, dataArr }) => {
     };
 
     useEffect(() => {
-        let windowWidth = window.innerWidth;
-        let { extraSm, small, medium, large } = breakpoints;
-
-        if (windowWidth <= extraSm) {
-            setSlidesPerView(3);
-        } else if (windowWidth > extraSm && windowWidth <= small) {
-            setSlidesPerView(4);
-        } else if (windowWidth <= medium && windowWidth >= small) {
-            setSlidesPerView(5);
-        } else if (windowWidth >= medium && windowWidth <= large) {
-            setSlidesPerView(6);
-        } else {
-            setSlidesPerView(7);
-        }
+        window.addEventListener("resize", () => {
+            let windowWidth = window.innerWidth;
+            let { extraSm, small, medium, large } = breakpoints;
+            if (windowWidth <= extraSm) {
+                setSlidesPerView(3);
+            } else if (windowWidth > extraSm && windowWidth <= small) {
+                setSlidesPerView(4);
+            } else if (windowWidth <= medium && windowWidth >= small) {
+                setSlidesPerView(5);
+            } else if (windowWidth >= medium && windowWidth <= large) {
+                setSlidesPerView(6);
+            } else {
+                setSlidesPerView(7);
+            }
+        });
     }, []);
 
     return (

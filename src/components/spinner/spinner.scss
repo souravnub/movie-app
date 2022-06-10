@@ -15,21 +15,21 @@
     border-radius: 50%;
 
     width: $fs-extra-lg;
-    aspect-ratio: 1;
+    height: $fs-extra-lg;
 
     animation: spinner-spin 5s ease-in-out infinite;
 }
 
 .spinner-normal {
-    $border-width: 0.25em;
-    border: $border-width solid $clr-primary-faded;
-    border-top: $border-width solid $clr-accent;
-    border-bottom: $border-width solid $clr-accent;
+    --border-width: 0.25em;
+    border: var(--border-width) solid $clr-primary-faded;
+    border-top: var(--border-width) solid $clr-accent;
+    border-bottom: var(--border-width) solid $clr-accent;
 
     border-radius: 50%;
 
     width: 2.3rem;
-    aspect-ratio: 1;
+    height: 2.3em;
 
     animation: spinner-spin 5s ease-in-out infinite;
 }

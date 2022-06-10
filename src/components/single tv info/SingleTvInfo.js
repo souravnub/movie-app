@@ -5,6 +5,7 @@ import { originalImgUrl } from "../../features/api/apiRoutesData";
 import axiosClient from "../../features/api/axiosClient";
 import Spinner from "../spinner/Spinner";
 import { FaInfoCircle } from "react-icons/fa";
+import { TbFaceIdError } from "react-icons/tb";
 import SwiperComponent from "../swiper/SwiperComponent";
 import { MdBookmarkAdd, MdBookmarkRemove } from "react-icons/md";
 import "../single movie info/singlemovie.scss";
@@ -43,23 +44,25 @@ const SingleTvInfo = () => {
         }
     }, [bookmarked, isLoading]);
 
-    const similarTvData = similarTv.map((movie) => {
-        const { id, original_title, original_name, poster_path } = movie;
-        return (
-            <div className="similar-movie-card">
-                <div className="img-container">
-                    <img
-                        src={originalImgUrl(poster_path)}
-                        alt={original_title || original_name}
-                    />
-                    <Link className="overlay" to={`/tv/${id}`}>
-                        <FaInfoCircle />
-                    </Link>
-                </div>
-                <span>{original_title || original_name}</span>
-            </div>
-        );
-    });
+    const similarTvData = similarTv
+        ? similarTv.map((movie) => {
+              const { id, original_title, original_name, poster_path } = movie;
+              return (
+                  <div className="similar-movie-card">
+                      <div className="img-container">
+                          <img
+                              src={originalImgUrl(poster_path)}
+                              alt={original_title || original_name}
+                          />
+                          <Link className="overlay" to={`/tv/${id}`}>
+                              <FaInfoCircle />
+                          </Link>
+                      </div>
+                      <span>{original_title || original_name}</span>
+                  </div>
+              );
+          })
+        : [];
 
     const breakpoints = {
         small: 500,
@@ -72,10 +75,16 @@ const SingleTvInfo = () => {
         dispatch(fetchSingleTvData(tvId));
         axiosClient
             .get(`/tv/${tvId}/credits`)
-            .then((res) => setCasts(res.data.cast.slice(0, 5)));
+            .then(
+                (res) => res.data.cast && setCasts(res.data.cast.slice(0, 5))
+            );
         axiosClient
             .get(`/tv/${tvId}/videos`)
-            .then((res) => setRelatedVideos(res.data.results.slice(0, 6)));
+            .then(
+                (res) =>
+                    res.data.results &&
+                    setRelatedVideos(res.data.results.slice(0, 6))
+            );
         axiosClient.get(`/tv/${tvId}/similar`).then((res) => {
             setSimilarTv(res.data.results);
         });
@@ -117,8 +126,13 @@ const SingleTvInfo = () => {
     if (isLoading) {
         return <Spinner />;
     }
-    if (isError) {
-        return <h1>error : {error}</h1>;
+    if (isError || singleTvDetails.success === false) {
+        return (
+            <div className="error-container">
+                <TbFaceIdError className="icon" />
+                <span>{error || singleTvDetails.status_message}</span>
+            </div>
+        );
     }
 
     const {

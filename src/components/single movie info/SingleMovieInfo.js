@@ -9,6 +9,7 @@ import {
 } from "../../features/movies/singleMovieSlice";
 import Spinner from "../spinner/Spinner";
 import { FaInfoCircle } from "react-icons/fa";
+import { TbFaceIdError } from "react-icons/tb";
 import { MdBookmarkAdd, MdBookmarkRemove } from "react-icons/md";
 import SwiperComponent from "../swiper/SwiperComponent";
 import "./singlemovie.scss";
@@ -45,23 +46,25 @@ const SingleMovieInfo = () => {
     const [relatedVedios, setRelatedVideos] = useState([]);
     const [similarMovies, setSimilarMovies] = useState([]);
 
-    const similarMoviesData = similarMovies.map((movie) => {
-        const { id, original_title, poster_path } = movie;
-        return (
-            <div className="similar-movie-card">
-                <div className="img-container">
-                    <img
-                        src={originalImgUrl(poster_path)}
-                        alt={original_title}
-                    />
-                    <Link className="overlay" to={`/movie/${id}`}>
-                        <FaInfoCircle />
-                    </Link>
+    const similarMoviesData =
+        similarMovies &&
+        similarMovies.map((movie) => {
+            const { id, original_title, poster_path } = movie;
+            return (
+                <div className="similar-movie-card">
+                    <div className="img-container">
+                        <img
+                            src={originalImgUrl(poster_path)}
+                            alt={original_title}
+                        />
+                        <Link className="overlay" to={`/movie/${id}`}>
+                            <FaInfoCircle />
+                        </Link>
+                    </div>
+                    <span>{original_title}</span>
                 </div>
-                <span>{original_title}</span>
-            </div>
-        );
-    });
+            );
+        });
 
     const breakpoints = {
         extraSm: 400,
@@ -73,29 +76,40 @@ const SingleMovieInfo = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getMovieDetails(movieId));
-        axiosClient
-            .get(`/movie/${movieId}/credits`)
-            .then((res) => setCasts(res.data.cast.slice(0, 5)));
+        axiosClient.get(`/movie/${movieId}/credits`).then((res) => {
+            let mainRes =
+                res.data.cast &&
+                res.data.cast.filter((cast) => {
+                    if (cast.profile_path) return cast;
+                });
+            setCasts(mainRes && mainRes.slice(0, 5));
+        });
         axiosClient
             .get(`/movie/${movieId}/videos`)
-            .then((res) => setRelatedVideos(res.data.results.slice(0, 6)));
+            .then(
+                (res) =>
+                    res.data.results &&
+                    setRelatedVideos(res.data.results.slice(0, 6))
+            );
         axiosClient.get(`/movie/${movieId}/similar`).then((res) => {
             setSimilarMovies(res.data.results);
         });
 
-        let windowWidth = window.innerWidth;
-        let { small, medium, large, extraSm } = breakpoints;
-        if (windowWidth <= extraSm) {
-            setSlidesPerView(3);
-        } else if (windowWidth >= extraSm && windowWidth <= small) {
-            setSlidesPerView(4);
-        } else if (windowWidth <= medium && windowWidth >= small) {
-            setSlidesPerView(5);
-        } else if (windowWidth >= medium && windowWidth <= large) {
-            setSlidesPerView(6);
-        } else {
-            setSlidesPerView(8);
-        }
+        window.addEventListener("resize", () => {
+            let windowWidth = window.innerWidth;
+            let { small, medium, large, extraSm } = breakpoints;
+            if (windowWidth <= extraSm) {
+                setSlidesPerView(3);
+            } else if (windowWidth >= extraSm && windowWidth <= small) {
+                setSlidesPerView(4);
+            } else if (windowWidth <= medium && windowWidth >= small) {
+                setSlidesPerView(5);
+            } else if (windowWidth >= medium && windowWidth <= large) {
+                setSlidesPerView(6);
+            } else {
+                setSlidesPerView(8);
+            }
+        });
     }, [movieId]);
 
     const handleAddToBookmarks = () => {
@@ -122,11 +136,16 @@ const SingleMovieInfo = () => {
     if (isLoading) {
         return <Spinner />;
     }
-    if (isError) {
-        return <h1>error : {error}</h1>;
+    if (isError || movieDetails.success === false) {
+        return (
+            <div className="error-container">
+                <TbFaceIdError className="icon" />
+                <span>{error || movieDetails.status_message}</span>
+            </div>
+        );
     }
 
-    const { id, backdrop_path, original_title, overview, poster_path, genres } =
+    const { backdrop_path, original_title, overview, poster_path, genres } =
         movieDetails;
 
     return (
@@ -216,12 +235,18 @@ const SingleMovieInfo = () => {
 
             <div className="similar-movies-container">
                 <span>similar</span>
-                <SwiperComponent
-                    elements={similarMoviesData}
-                    slidesPerView={slidesPerView}
-                    spaceBetween={10}
-                    isPagination={false}
-                />
+                {similarMovies.length > 0 ? (
+                    <SwiperComponent
+                        elements={similarMoviesData}
+                        slidesPerView={slidesPerView}
+                        spaceBetween={10}
+                        isPagination={false}
+                    />
+                ) : (
+                    <h2 style={{ opacity: 0.5, textTransform: "capitalize" }}>
+                        no similar movies found
+                    </h2>
+                )}
             </div>
         </>
     );

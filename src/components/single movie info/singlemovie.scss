@@ -1,5 +1,24 @@
 @use "../../scss/base" as *;
 
+.error-container {
+    padding-block: calc($padding-extra-lg + 3rem);
+
+    @include flex(
+        $direction: column,
+        $justify-content: center,
+        $align-items: center
+    );
+    .icon {
+        font-size: calc($fs-heading + 1rem);
+        color: $clr-accent;
+    }
+    span {
+        font-size: max(calc($fs-heading - 1rem), 1rem);
+        text-transform: capitalize;
+        font-weight: $fw-bold;
+    }
+}
+
 .single-movie-info-container {
     background-position: center top;
     background-repeat: no-repeat;
@@ -70,7 +89,7 @@
             }
             .casts-container {
                 & > span {
-                    font-size: calc($fs-heading - 1.4rem);
+                    font-size: min(calc($fs-heading - 0.6rem), 1rem);
                     text-transform: capitalize;
                     font-weight: $fw-normal;
                     margin-block: $gap-sm;
@@ -106,16 +125,18 @@
     .video-card {
         width: 100%;
         @include flex($direction: column, $align-items: center);
+        padding-inline: $padding-md;
         span {
             font-weight: $fw-bold;
-            font-size: calc($fs-heading - 1.5rem);
+            font-size: max(calc($fs-heading - 1.5rem), 0.8rem);
         }
         iframe {
             background-color: $clr-neutral-faded;
-            width: 50%;
+            width: 60%;
             aspect-ratio: 16 / 10;
         }
         @media screen and (max-width: 56.5rem) {
+            padding: 0.6rem !important;
             iframe {
                 width: 80%;
             }

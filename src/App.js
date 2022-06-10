@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import BookMarkPage from "./components/bookmark page/BookMarkPage";
+import BookMarkPage from "./pages/bookmark page/BookMarkPage";
 import Footer from "./components/footer/Footer";
 import Home from "./components/Home";
 import Navbar from "./components/navbar/Navbar";
@@ -9,6 +9,9 @@ import TrendingMoviesMedia from "./components/single media coponent/TrendingMovi
 import TrendingTvComponent from "./components/single media coponent/TrendingTvComponent";
 import SingleMovieInfo from "./components/single movie info/SingleMovieInfo";
 import SingleTvInfo from "./components/single tv info/SingleTvInfo";
+import MoviesPage from "./pages/movies Page/MoviesPage";
+import TvSeriesPage from "./pages/tv Page/TvSeriesPage";
+import PageNotFound from "./pages/404 Page/PageNotFound";
 
 function App() {
     return (
@@ -35,6 +38,9 @@ function App() {
                     element={<TopRatedTvMedia />}
                 />
                 <Route path="/bookmarked" element={<BookMarkPage />} />
+                <Route path="/movies" element={<MoviesPage />} />
+                <Route path="/tv" element={<TvSeriesPage />} />
+                <Route path="*" element={<PageNotFound />} />
             </Routes>
             <Footer />
         </BrowserRouter>

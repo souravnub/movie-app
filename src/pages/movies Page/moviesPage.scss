@@ -1,0 +1,148 @@
+@use "../../scss/base" as *;
+
+.main-movies-container {
+    @include flex($direction: column, $gap: $gap-lg);
+    padding-top: $padding-extra-lg;
+
+    &__btn-container {
+        padding-inline: $padding-md;
+
+        width: 100%;
+        @include flex(
+            $gap: $gap-lg,
+            $justify-content: space-between,
+            $align-items: center
+        );
+
+        @media screen and (max-width: 41.8rem) {
+            flex-wrap: wrap;
+            justify-content: center !important;
+            gap: $gap-sm !important;
+        }
+
+        .action-btn-container {
+            @include flex();
+
+            button {
+                padding: calc($padding-extra-sm + 0.2rem) $padding-md;
+                font-size: calc($fs-md + 0.2rem);
+                color: $clr-primary;
+                text-transform: capitalize;
+                background-color: $clr-accent-faded;
+
+                border-radius: 0.2em;
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+
+                isolation: isolate;
+
+                overflow: hidden;
+                position: relative;
+
+                &::after {
+                    content: "";
+
+                    position: absolute;
+                    bottom: -1em;
+                    left: -1em;
+                    z-index: -1;
+
+                    width: 15%;
+                    aspect-ratio: 1;
+                    border-radius: 50%;
+                    background-color: rgba($clr-primary-faded, 0.2);
+
+                    transform: scale(0);
+                    transition: transform 700ms ease;
+                }
+                &.btn-close::after {
+                    width: 30%;
+                    display: grid;
+                    place-items: center;
+                }
+                &:hover,
+                &:focus {
+                    &::after {
+                        transform: scale(8);
+                    }
+                }
+
+                &.active {
+                    &::after {
+                        transform: scale(8);
+                    }
+                    border-bottom: 2px solid white;
+                }
+            }
+        }
+    }
+
+    &__movies-card-container {
+        padding-inline: $padding-sm;
+
+        @include flex($justify-content: center);
+        flex-wrap: wrap;
+
+        &__movie-card {
+            min-width: 8rem;
+            max-width: 10rem;
+            .img-container {
+                position: relative;
+                min-height: 12rem;
+                &:hover {
+                    & > span {
+                        color: $clr-accent;
+                    }
+                    a {
+                        opacity: 1;
+                    }
+                }
+                a {
+                    position: absolute;
+                    inset: 0;
+                    background-color: rgba(#000000, 0.8);
+                    font-size: $fs-lg;
+                    opacity: 0;
+                    @include flex(
+                        $align-items: center,
+                        $justify-content: center
+                    );
+                    transition: opacity 200ms ease-in-out;
+                    &:focus {
+                        opacity: 1;
+                        border: none;
+                        outline: none;
+                    }
+                }
+
+                @include flex($direction: column);
+                img {
+                    border-radius: 1em;
+                }
+            }
+            span {
+                font-size: calc($fs-paragraph - 0.1rem);
+                font-weight: $fw-normal;
+                transition: color 250ms ease-in-out;
+            }
+            @media screen and (max-width: 22.5rem) {
+                width: 80%;
+                max-width: unset;
+            }
+        }
+    }
+
+    &__bottom-container {
+        width: 100%;
+        @include flex($align-items: center, $justify-content: center);
+        margin-block: $gap-lg;
+
+        &__search-bottom-btn-container {
+            @include flex($direction: column, $align-items: center);
+            span {
+                text-transform: capitalize;
+                font-size: $fs-paragraph;
+            }
+        }
+    }
+}

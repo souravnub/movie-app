@@ -49,12 +49,11 @@ const TopRatedTvMedia = () => {
                 {isLoading ? (
                     <SpinnerNoraml />
                 ) : (
-                    <button
-                        disabled={hideBtn}
-                        className="btn"
-                        onClick={pageIncrement}>
-                        fetch more
-                    </button>
+                    !hideBtn && (
+                        <button className="btn-styled" onClick={pageIncrement}>
+                            fetch more
+                        </button>
+                    )
                 )}
             </div>
         </>

@@ -16,7 +16,7 @@ export const fetchTopRatedMovies = createAsyncThunk(
             .get(`/movie/top_rated?page=${page}&`)
             .then((res) => res.data)
             .catch((err) => {
-                throw rejectWithValue(err.message);
+                throw rejectWithValue(err.response.data.status_message);
             })
 );
 

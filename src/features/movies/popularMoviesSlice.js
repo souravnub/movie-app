@@ -15,7 +15,7 @@ export const getPopularMovies = createAsyncThunk(
             .get("/movie/popular")
             .then((res) => res.data)
             .catch((err) => {
-                rejectWithValue(err.message);
+                rejectWithValue(err.response.data.status_message);
             });
     }
 );

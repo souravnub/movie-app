@@ -18,7 +18,7 @@ export const fetchTrendingMovies = createAsyncThunk(
                 return res.data;
             })
             .catch((err) => {
-                throw rejectWithValue(err.message);
+                throw rejectWithValue(err.response.data.status_message);
             })
 );
 

@@ -1,0 +1,60 @@
+@use "../../scss/base" as *;
+
+form {
+    @include flex($align-items: center, $gap: 0);
+    padding: $padding-sm;
+
+    button {
+        @include flex($align-items: center, $justify-content: center);
+
+        padding: $padding-extra-sm $padding-md;
+        font-size: 1.3rem;
+        border-bottom-right-radius: 0.3em;
+        border-top-right-radius: 0.3em;
+
+        color: $clr-primary;
+        background-color: $clr-accent;
+
+        transition: background-color 200ms ease;
+        outline: none;
+
+        &:hover,
+        &:focus {
+            background-color: $clr-accent-faded;
+        }
+    }
+
+    .input-field-container {
+        position: relative;
+        input {
+            background-color: $clr-neutral-faded;
+            border-top-left-radius: 0.3em;
+            border-bottom-left-radius: 0.3em;
+            border: none;
+            outline: none;
+            padding-block: $padding-extra-sm;
+            padding-inline: $padding-sm;
+            color: $clr-primary;
+            font-size: 1.1rem;
+            &:focus,
+            &:focus-within,
+            &:not(:placeholder-shown) {
+                & ~ .input-bottom-line {
+                    transform: scaleX(1);
+                }
+            }
+        }
+        .input-bottom-line {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background-color: $clr-accent;
+            height: 0.1em;
+            width: 100%;
+
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform 200ms ease;
+        }
+    }
+}

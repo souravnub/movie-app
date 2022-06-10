@@ -44,3 +44,22 @@
         box-shadow: 0 0 0.4em 0.2em $clr-accent;
     }
 }
+
+.btn-styled {
+    color: $clr-primary;
+    text-transform: capitalize;
+    font-size: calc($fs-md + 0.3rem);
+    font-weight: $fw-normal;
+    background: linear-gradient(to right, $clr-accent 50%, $clr-primary 50%);
+    background-position: center left;
+    background-size: 200%;
+    padding: $padding-sm $padding-extra-lg;
+
+    transition: background-position 500ms ease, color 450ms ease;
+
+    &:hover,
+    &:focus-visible {
+        color: $clr-accent;
+        background-position: center right;
+    }
+}

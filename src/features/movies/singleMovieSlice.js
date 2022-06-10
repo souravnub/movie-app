@@ -15,7 +15,7 @@ export const getMovieDetails = createAsyncThunk(
             .get(`/movie/${movieId}`)
             .then((res) => res.data)
             .catch((err) => {
-                throw rejectWithValue(err.message);
+                throw rejectWithValue(err.response.data.status_message);
             })
 );
 

@@ -2,12 +2,22 @@ import React, { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./navbar.scss";
 import { MdBookmarkAdded } from "react-icons/md";
+import { HiOutlineMenuAlt3 } from "react-icons/hi";
+import { CgClose } from "react-icons/cg";
+import { useDispatch, useSelector } from "react-redux";
+import { closeMenu, openMenu } from "../../features/navbar/navSlice";
 
 const Navbar = () => {
     const location = useLocation();
     let currentLoaction = location.pathname;
 
+    const { isMenuOpen } = useSelector((store) => store.navbar);
+    const dispatch = useDispatch();
+
     useEffect(() => {
+        if (isMenuOpen) {
+            dispatch(closeMenu());
+        }
         let links = document.querySelectorAll("nav .nav-links-container li a");
 
         links.forEach((link) => {
@@ -45,7 +55,10 @@ const Navbar = () => {
                 <span>movies</span>
             </Link>
 
-            <ul className="nav-links-container">
+            <ul
+                className={`nav-links-container ${
+                    isMenuOpen ? "menu-open" : ""
+                }`}>
                 {links.map((link, idx) => {
                     return (
                         <li key={idx}>
@@ -53,11 +66,21 @@ const Navbar = () => {
                         </li>
                     );
                 })}
+
+                <button onClick={() => dispatch(closeMenu())}>
+                    <CgClose />
+                </button>
             </ul>
 
-            <Link to="/bookmarked" className="bookmark-link">
-                <MdBookmarkAdded />
-            </Link>
+            <div className="nav-btn-container">
+                <button onClick={() => dispatch(openMenu())}>
+                    <HiOutlineMenuAlt3 />
+                </button>
+
+                <Link to="/bookmarked" className="bookmark-link">
+                    <MdBookmarkAdded />
+                </Link>
+            </div>
         </nav>
     );
 };

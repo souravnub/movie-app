@@ -1,0 +1,70 @@
+@use "../../scss/base" as *;
+
+.main-page-not-found-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    img {
+        background-color: rgba(white, 0.01);
+        padding: $padding-lg;
+    }
+
+    &__info-container {
+        padding-inline: $padding-md;
+        padding-block: $padding-lg;
+
+        @include flex($direction: column, $justify-content: center);
+
+        .top-head {
+            @include flex($align-items: center, $gap: 0);
+            font-size: $fs-heading;
+            font-weight: $fw-bold;
+
+            .icon {
+                font-size: calc($fs-heading + 2rem);
+            }
+        }
+
+        & > span {
+            font-size: $fs-heading;
+            font-weight: $fw-extra-bold;
+            color: $clr-accent-faded;
+        }
+
+        .bottom-head {
+            @include flex($direction: column, $gap: 0.3em);
+            text-transform: capitalize;
+            font-weight: $fw-bold;
+            font-size: calc($fs-lg - 0.3rem);
+
+            & > span:nth-child(2) {
+                font-size: $fs-paragraph;
+                font-weight: $fw-normal;
+            }
+        }
+
+        & > a {
+            margin-top: $padding-lg;
+            font-size: 1rem;
+            padding-inline: $padding-lg;
+        }
+    }
+
+    @media screen and (max-width: 50rem) {
+        margin-top: $padding-lg;
+        grid-template-columns: 1fr;
+        grid-auto-rows: auto;
+        justify-items: center;
+
+        img {
+            min-width: 20rem;
+            max-width: 70%;
+        }
+        &__info-container {
+            align-items: center;
+            .bottom-head {
+                align-items: center;
+            }
+        }
+    }
+}

@@ -46,14 +46,25 @@
 
             .sub-heading {
                 font-weight: $fw-normal;
-                font-size: $fs-lg;
+                font-size: 1.3rem;
                 text-transform: capitalize;
 
                 margin-bottom: $gap-lg;
             }
 
             .bookmarked-elements-container {
-                @include flex();
+                @media screen and (max-width: 25rem) {
+                    @include flex(
+                        $align-items: center,
+                        $justify-content: center
+                    );
+                    .element-card {
+                        width: 80% !important;
+                    }
+                }
+
+                display: flex;
+
                 flex-wrap: wrap;
                 gap: $gap-lg;
 
@@ -68,17 +79,26 @@
                         z-index: 99;
                         transform: translate(50%, -50%);
 
+                        border-radius: 50%;
+                        background-color: rgba(black, 0.87);
+
+                        @include flex(
+                            $align-items: center,
+                            $justify-content: center
+                        );
+                        padding: 0.2em;
+
+                        transition: background-color 200ms ease;
+
                         &:hover,
                         &:focus-visible {
-                            .icon {
-                                color: $clr-accent;
-                            }
+                            background-color: $clr-primary;
                         }
                     }
 
                     .icon {
                         font-size: $fs-lg;
-                        color: $clr-primary;
+                        color: $clr-accent;
                         padding: 0.1em;
 
                         transition: color 250ms ease;

@@ -19,10 +19,17 @@
     .modal-content-container {
         position: relative;
         z-index: 999;
-        width: 50%;
-        height: 65%;
+        width: 70%;
+        aspect-ratio: 2 / 1.5;
 
         background-color: $clr-neutral-faded;
+
+        @media screen and (max-width: 34.5rem) {
+            width: 90%;
+            button {
+                right: 0 !important;
+            }
+        }
 
         iframe {
             min-width: 100%;
