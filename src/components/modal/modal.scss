@@ -20,6 +20,7 @@
         position: relative;
         z-index: 999;
         width: 70%;
+        max-width: 650px;
         aspect-ratio: 2 / 1.5;
 
         background-color: $clr-neutral-faded;
