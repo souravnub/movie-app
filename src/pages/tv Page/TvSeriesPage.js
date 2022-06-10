@@ -27,7 +27,7 @@ const TvSeriesPage = () => {
     );
 
     const [currentContentType, setCurrentContentType] = useState(
-        localStorage.getItem("currentTvContentType" || "trending")
+        localStorage.getItem("currentTvContentType") || "trending"
     );
 
     const [dataArr, setDataArr] = useState([]);

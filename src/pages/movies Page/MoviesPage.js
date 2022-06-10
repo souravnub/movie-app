@@ -27,7 +27,7 @@ const MoviesPage = () => {
     );
 
     const [currentContentType, setCurrentContentType] = useState(
-        localStorage.getItem("currentMoviesContentType" || "trending")
+        localStorage.getItem("currentMoviesContentType") || "trending"
     );
 
     const [dataArr, setDataArr] = useState([]);
