@@ -78,6 +78,7 @@
             }
             .genres-container {
                 @include flex();
+                flex-wrap: wrap;
                 .btn-primary {
                     padding: $padding-extra-sm $padding-sm;
                     font-size: $fs-paragraph;
