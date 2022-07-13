@@ -88,7 +88,14 @@ const SingleTvInfo = () => {
         axiosClient.get(`/tv/${tvId}/similar`).then((res) => {
             setSimilarTv(res.data.results);
         });
+    }, [tvId]);
 
+    useEffect(() => {
+        getSlidesPerView();
+        window.addEventListener("resize", getSlidesPerView);
+    }, []);
+
+    let getSlidesPerView = () => {
         let windowWidth = window.innerWidth;
         let { small, medium, large } = breakpoints;
         if (windowWidth <= small) {
@@ -100,7 +107,7 @@ const SingleTvInfo = () => {
         } else {
             setSlidesPerView(8);
         }
-    }, [tvId]);
+    };
 
     const handleAddToBookmarks = () => {
         const { id, original_title, original_name, poster_path, mediaType } =

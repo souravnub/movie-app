@@ -97,23 +97,28 @@ const SingleMovieInfo = () => {
         axiosClient.get(`/movie/${movieId}/similar`).then((res) => {
             setSimilarMovies(res.data.results);
         });
-
-        window.addEventListener("resize", () => {
-            let windowWidth = window.innerWidth;
-            let { small, medium, large, extraSm } = breakpoints;
-            if (windowWidth <= extraSm) {
-                setSlidesPerView(3);
-            } else if (windowWidth >= extraSm && windowWidth <= small) {
-                setSlidesPerView(4);
-            } else if (windowWidth <= medium && windowWidth >= small) {
-                setSlidesPerView(5);
-            } else if (windowWidth >= medium && windowWidth <= large) {
-                setSlidesPerView(6);
-            } else {
-                setSlidesPerView(8);
-            }
-        });
     }, [movieId]);
+
+    useEffect(() => {
+        getSlidesPerView();
+        window.addEventListener("resize", getSlidesPerView);
+    }, []);
+
+    let getSlidesPerView = () => {
+        let windowWidth = window.innerWidth;
+        let { small, medium, large, extraSm } = breakpoints;
+        if (windowWidth <= extraSm) {
+            setSlidesPerView(3);
+        } else if (windowWidth >= extraSm && windowWidth <= small) {
+            setSlidesPerView(4);
+        } else if (windowWidth <= medium && windowWidth >= small) {
+            setSlidesPerView(5);
+        } else if (windowWidth >= medium && windowWidth <= large) {
+            setSlidesPerView(6);
+        } else {
+            setSlidesPerView(8);
+        }
+    };
 
     const handleAddToBookmarks = () => {
         const { id, original_title, original_name, poster_path, mediaType } =
